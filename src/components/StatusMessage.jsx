@@ -1,9 +1,9 @@
-const StatusMessage = ({ winner, isXNext, squares }) => {
-  const noMovesleft = squares.every(squareValue => squareValue !== null);
+const StatusMessage = ({ winner, gamingBoard }) => {
+  const { squares, isXNext } = gamingBoard;
+
+  const noMovesLeft = squares.every(squareValue => squareValue !== null);
   const nextPlayer = isXNext ? 'X' : 'O';
-  const statusMessage = winner
-    ? `Winner is ${winner}`
-    : `Next player is ${nextPlayer}`;
+
   const renderStatusMessage = () => {
     if (winner) {
       return (
@@ -15,7 +15,8 @@ const StatusMessage = ({ winner, isXNext, squares }) => {
         </>
       );
     }
-    if (!winner && noMovesleft) {
+
+    if (!winner && noMovesLeft) {
       return (
         <>
           <span className="text-orange">O</span> and{' '}
@@ -23,7 +24,8 @@ const StatusMessage = ({ winner, isXNext, squares }) => {
         </>
       );
     }
-    if (!winner && !noMovesleft) {
+
+    if (!winner && !noMovesLeft) {
       return (
         <>
           Next player is{' '}
@@ -33,8 +35,11 @@ const StatusMessage = ({ winner, isXNext, squares }) => {
         </>
       );
     }
+
     return null;
   };
+
   return <h2 className="status-message">{renderStatusMessage()}</h2>;
 };
+
 export default StatusMessage;
